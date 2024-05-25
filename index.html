@@ -1,0 +1,68 @@
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+
+
+
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: /targets-6-mirrored.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <a-asset-item id="bearModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf"></a-asset-item>
+        <a-asset-item id="raccoonModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf"></a-asset-item>
+        <img id="side0" src="/faces/mirrored_output_0.jpg">
+        <img id="side1" src="/faces/mirrored_output_1.jpg">
+        <img id="side2" src="/faces/mirrored_output_2.jpg">
+        <img id="side3" src="/faces/mirrored_output_3.jpg">
+        <img id="side4" src="/faces/mirrored_output_4.jpg">
+        <img id="side5" src="/faces/mirrored_output_5.jpg">
+
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-image src="#side0" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-image>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-image src="#side1" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-image>
+      </a-entity> 
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-image src="#side2" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-image>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-image src="#side3" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-image>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-image src="#side4" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-image>
+      </a-entity>
+      <a-entity mindar-image-target="targetIndex: 5">
+        <a-image src="#side5" position="0 0 0" height="1" width="1" rotation="0 0 0"></a-image>
+      </a-entity>
+    </a-scene>
+
+
+  </body>
+
+
+  <script>
+    console.log("script loaded")
+    // iterate over all a-entities with mindar-image-target component
+    const targets = document.querySelectorAll("[mindar-image-target]");
+    targets.forEach(target => {
+      // detect target found
+      target.addEventListener("targetFound", event => {
+        console.log("target found");
+      });
+
+      // detect target lost
+      target.addEventListener("targetLost", event => {
+        console.log("target lost");
+      });
+    });
+</script>
+</html>
